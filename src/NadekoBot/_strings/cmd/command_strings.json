@@ -1616,6 +1616,13 @@
       "{0}birb"
     ]
   },
+   "whisper": {
+     "Cmd": "whisper",
+     "Desc": "Pulls the first image found from whisper.sh using a search parameter.",
+     "Usage": [
+       "{0}whisper connor"
+     ]
+   },
   "image": {
     "Cmd": "image img",
     "Desc": "Pulls the first image found using a search parameter. Use `{0}rimg` for different results.",

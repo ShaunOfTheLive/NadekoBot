@@ -277,6 +277,12 @@ namespace NadekoBot.Modules.Searches
         }
 
         [NadekoCommand, Usage, Description, Aliases]
+        public async Task Whisper([Remainder] string terms = null)
+        {
+            await Image(terms + " site:whisper.sh");
+        }
+
+        [NadekoCommand, Usage, Description, Aliases]
         public async Task Image([Remainder] string terms = null)
         {
             var oterms = terms?.Trim();
@@ -284,7 +290,6 @@ namespace NadekoBot.Modules.Searches
                 return;
 
             terms = WebUtility.UrlEncode(oterms).Replace(' ', '+');
-
             try
             {
                 var res = await _google.GetImageAsync(oterms).ConfigureAwait(false);
