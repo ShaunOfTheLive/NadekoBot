@@ -18,7 +18,7 @@ namespace NadekoBot.Core.Services.Impl
 {
     public class GoogleApiService : IGoogleApiService
     {
-        const string search_engine_id = "018084019232060951019:hs5piey28-e";
+        const string search_engine_id = "002165609244022915260:u27ybbvwc6o";
 
         private YouTubeService yt;
         private UrlshortenerService sh;
