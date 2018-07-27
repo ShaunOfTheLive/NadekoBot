@@ -219,6 +219,7 @@ namespace NadekoBot.Core.Services.Impl
 
             var search = await req.ExecuteAsync().ConfigureAwait(false);
 
+            search.Items[0].Link = search.Items[0].Link.Replace("https://cdn-webimages.wimages.net", "http://cdn-webimages.wimages.net");
             return new ImageResult(search.Items[0].Image, search.Items[0].Link);
         }
 
