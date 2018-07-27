@@ -302,6 +302,11 @@ namespace NadekoBot.Modules.Searches
                     .WithImageUrl(res.Link)
                     .WithTitle(Context.User.ToString());
                 await Context.Channel.EmbedAsync(embed).ConfigureAwait(false);
+                if (!string.IsNullOrWhiteSpace(res.Link)
+                    && res.Link.Contains("https://i.ytimg.com"))
+                {
+                    await Youtube(res.Link.Substring(23, 11));
+                }
             }
             catch
             {
