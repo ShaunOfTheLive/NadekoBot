@@ -277,6 +277,19 @@ namespace NadekoBot.Modules.Searches
         }
 
         [NadekoCommand, Usage, Description, Aliases]
+        public async Task InspiroBot()
+        {
+            using (var http = _httpFactory.CreateClient())
+            {
+                http.DefaultRequestHeaders.Clear();
+                var res = await http.GetStringAsync($"https://inspirobot.me/api?generate=true").ConfigureAwait(false);
+                await Context.Channel.EmbedAsync(new EmbedBuilder()
+                    .WithOkColor()
+                    .WithImageUrl(res)).ConfigureAwait(false);
+            }
+        }
+
+        [NadekoCommand, Usage, Description, Aliases]
         public async Task Whisper([Remainder] string terms = null)
         {
             await Image(terms + " site:whisper.sh");
