@@ -204,7 +204,7 @@ namespace NadekoBot.Core.Services.Impl
             return toReturn;
         }
 
-        public async Task<ImageResult> GetImageAsync(string query, int start = 1)
+        public async Task<ImageResult> GetImageAsync(string query, int start = 1, bool anim = false)
         {
             await Task.Yield();
             if (string.IsNullOrWhiteSpace(query))
@@ -216,6 +216,9 @@ namespace NadekoBot.Core.Services.Impl
             req.Fields = "items(image(contextLink,thumbnailLink),link)";
             req.SearchType = CseResource.ListRequest.SearchTypeEnum.Image;
             req.Start = start;
+            if (anim) {
+              req.FileType = "gif";
+            }
 
             var search = await req.ExecuteAsync().ConfigureAwait(false);
 

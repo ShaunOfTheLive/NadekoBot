@@ -295,6 +295,118 @@ namespace NadekoBot.Modules.Searches
             await Image(terms + " site:whisper.sh");
         }
 
+				[NadekoCommand, Usage, Description, Aliases]
+				public async Task Gif([Remainder] string terms = null)
+				{
+            var oterms = terms?.Trim();
+            if (string.IsNullOrWhiteSpace(oterms))
+                return;
+
+            oterms = WebUtility.UrlEncode(oterms).Replace(' ', '+') + "+animated";
+            try
+            {
+                var res = await _google.GetImageAsync(oterms, 1, true).ConfigureAwait(false);
+                var embed = new EmbedBuilder()
+                    .WithOkColor()
+                    .WithAuthor(eab => eab.WithName(GetText("image_search_for") + " " + oterms.TrimTo(50))
+                        .WithUrl("https://www.google.rs/search?q=" + terms + "&source=lnms&tbm=isch")
+                        .WithIconUrl("http://i.imgur.com/G46fm8J.png"))
+                    .WithDescription(res.Link)
+                    .WithImageUrl(res.Link)
+                    .WithTitle(Context.User.ToString());
+                await Context.Channel.EmbedAsync(embed).ConfigureAwait(false);
+                if (!string.IsNullOrWhiteSpace(res.Link)
+                    && res.Link.Contains("https://i.ytimg.com"))
+                {
+                    await Youtube(res.Link.Substring(23, 11));
+                }
+            }
+            catch
+            {
+                _log.Warn("Falling back to Imgur search.");
+
+                var fullQueryLink = $"http://imgur.com/search?q={ terms }";
+                var config = Configuration.Default.WithDefaultLoader();
+                using (var document = await BrowsingContext.New(config).OpenAsync(fullQueryLink).ConfigureAwait(false))
+                {
+                    var elems = document.QuerySelectorAll("a.image-list-link");
+
+                    if (!elems.Any())
+                        return;
+
+                    var img = (elems.FirstOrDefault()?.Children?.FirstOrDefault() as IHtmlImageElement);
+
+                    if (img?.Source == null)
+                        return;
+
+                    var source = img.Source.Replace("b.", ".", StringComparison.InvariantCulture);
+
+                    var embed = new EmbedBuilder()
+                        .WithOkColor()
+                        .WithAuthor(eab => eab.WithName(GetText("image_search_for") + " " + oterms.TrimTo(50))
+                            .WithUrl(fullQueryLink)
+                            .WithIconUrl("http://s.imgur.com/images/logo-1200-630.jpg?"))
+                        .WithDescription(source)
+                        .WithImageUrl(source)
+                        .WithTitle(Context.User.ToString());
+                    await Context.Channel.EmbedAsync(embed).ConfigureAwait(false);
+                }
+            }
+		 	  }
+
+				[NadekoCommand, Usage, Description, Aliases]
+				public async Task RandomGif([Remainder] string terms = null)
+				{ 
+            var oterms = terms?.Trim();
+            if (string.IsNullOrWhiteSpace(oterms))
+                return;
+            oterms = WebUtility.UrlEncode(oterms).Replace(' ', '+') + "+animated";
+            try
+            {
+                var res = await _google.GetImageAsync(oterms, new NadekoRandom().Next(0, 50), true).ConfigureAwait(false);
+                var embed = new EmbedBuilder()
+                    .WithOkColor()
+                    .WithAuthor(eab => eab.WithName(GetText("image_search_for") + " " + oterms.TrimTo(50))
+                        .WithUrl("https://www.google.rs/search?q=" + terms + "&source=lnms&tbm=isch")
+                        .WithIconUrl("http://i.imgur.com/G46fm8J.png"))
+                    .WithDescription(res.Link)
+                    .WithImageUrl(res.Link)
+                    .WithTitle(Context.User.ToString());
+                await Context.Channel.EmbedAsync(embed).ConfigureAwait(false);
+            }
+            catch
+            {
+                _log.Warn("Falling back to Imgur");
+
+                var fullQueryLink = $"http://imgur.com/search?q={ terms }";
+                var config = Configuration.Default.WithDefaultLoader();
+                using (var document = await BrowsingContext.New(config).OpenAsync(fullQueryLink).ConfigureAwait(false))
+                {
+                    var elems = document.QuerySelectorAll("a.image-list-link").ToList();
+
+                    if (!elems.Any())
+                        return;
+
+                    var img = (elems.ElementAtOrDefault(new NadekoRandom().Next(0, elems.Count))?.Children?.FirstOrDefault() as IHtmlImageElement);
+
+                    if (img?.Source == null)
+                        return;
+
+                    var source = img.Source.Replace("b.", ".", StringComparison.InvariantCulture);
+
+                    var embed = new EmbedBuilder()
+                        .WithOkColor()
+                        .WithAuthor(eab => eab.WithName(GetText("image_search_for") + " " + oterms.TrimTo(50))
+                            .WithUrl(fullQueryLink)
+                            .WithIconUrl("http://s.imgur.com/images/logo-1200-630.jpg?"))
+                        .WithDescription(source)
+                        .WithImageUrl(source)
+                        .WithTitle(Context.User.ToString());
+                    await Context.Channel.EmbedAsync(embed).ConfigureAwait(false);
+                }
+            }
+				}
+
         [NadekoCommand, Usage, Description, Aliases]
         public async Task Image([Remainder] string terms = null)
         {

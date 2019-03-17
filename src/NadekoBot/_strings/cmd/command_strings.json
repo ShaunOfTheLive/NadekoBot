@@ -1630,6 +1630,20 @@
        "{0}whisper connor"
      ]
    },
+   "gif": {
+     "Cmd": "gif",
+     "Desc": "Pulls the first animated image found using a search parameter. Use `{0}rgif` for different results.",
+     "Usage": [
+       "{0}gif cute kitten"
+     ]
+   },
+   "randomgif": {
+     "Cmd": "randomgif rgif",
+    "Desc": "Pulls a random animated image using a search parameter.",
+     "Usage": [
+       "{0}rgif cute kitten"
+     ]
+   },
   "image": {
     "Cmd": "image img",
     "Desc": "Pulls the first image found using a search parameter. Use `{0}rimg` for different results.",
