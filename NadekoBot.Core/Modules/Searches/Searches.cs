@@ -318,7 +318,7 @@ namespace NadekoBot.Modules.Searches
                 if (!string.IsNullOrWhiteSpace(res.Link)
                     && res.Link.Contains("https://i.ytimg.com"))
                 {
-                    await Youtube(res.Link.Substring(23, 11));
+                    await Context.Channel.SendMessageAsync("https://www.youtube.com/watch?v=" + res.Link.Substring(23, 11)).ConfigureAwait(false);
                 }
             }
             catch
@@ -430,7 +430,7 @@ namespace NadekoBot.Modules.Searches
                 if (!string.IsNullOrWhiteSpace(res.Link)
                     && res.Link.Contains("https://i.ytimg.com"))
                 {
-                    await Youtube(res.Link.Substring(23, 11));
+                    await Context.Channel.SendMessageAsync("https://www.youtube.com/watch?v=" + res.Link.Substring(23, 11)).ConfigureAwait(false);
                 }
             }
             catch
