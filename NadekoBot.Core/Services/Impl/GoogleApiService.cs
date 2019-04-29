@@ -82,7 +82,7 @@ namespace NadekoBot.Core.Services.Impl
             query.MaxResults = count;
             query.RelatedToVideoId = id;
             query.Type = "video";
-            return (await query.ExecuteAsync().ConfigureAwait(false)).Items.Select(i => "http://www.youtube.com/watch?v=" + i.Id.VideoId);
+            return (await query.ExecuteAsync().ConfigureAwait(false)).Items.Select(i => "https://www.youtube.com/watch?v=" + i.Id.VideoId);
         }
 
         public async Task<IEnumerable<string>> GetVideoLinksByKeywordAsync(string keywords, int count = 1)
@@ -98,7 +98,7 @@ namespace NadekoBot.Core.Services.Impl
             query.MaxResults = count;
             query.Q = keywords;
             query.Type = "video";
-            return (await query.ExecuteAsync().ConfigureAwait(false)).Items.Select(i => "http://www.youtube.com/watch?v=" + i.Id.VideoId);
+            return (await query.ExecuteAsync().ConfigureAwait(false)).Items.Select(i => "https://www.youtube.com/watch?v=" + i.Id.VideoId);
         }
 
         public async Task<IEnumerable<(string Name, string Id, string Url)>> GetVideoInfosByKeywordAsync(string keywords, int count = 1)
@@ -114,7 +114,7 @@ namespace NadekoBot.Core.Services.Impl
             query.MaxResults = count;
             query.Q = keywords;
             query.Type = "video";
-            return (await query.ExecuteAsync().ConfigureAwait(false)).Items.Select(i => (i.Snippet.Title.TrimTo(50), i.Id.VideoId, "http://www.youtube.com/watch?v=" + i.Id.VideoId));
+            return (await query.ExecuteAsync().ConfigureAwait(false)).Items.Select(i => (i.Snippet.Title.TrimTo(50), i.Id.VideoId, "https://www.youtube.com/watch?v=" + i.Id.VideoId));
         }
 
         public Task<string> ShortenUrl(Uri url) => ShortenUrl(url.ToString());
