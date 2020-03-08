@@ -974,6 +974,12 @@ namespace NadekoBot.Modules.Searches
         }
 
         [NadekoCommand, Usage, Description, Aliases]
+        public async Task ChangeGoogleApiKey(string GoogleApiKey)
+        {
+            _google.ChangeGoogleApiKey(GoogleApiKey);
+        }
+
+        [NadekoCommand, Usage, Description, Aliases]
         [RequireContext(ContextType.Guild)]
         public async Task Bible(string book, string chapterAndVerse)
         {

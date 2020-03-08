@@ -43,6 +43,20 @@ namespace NadekoBot.Core.Services.Impl
             sh = new UrlshortenerService(bcs);
             cs = new CustomsearchService(bcs);
         }
+
+        public void ChangeGoogleApiKey(string GoogleApiKey)
+        {
+            var bcs = new BaseClientService.Initializer
+            {
+                ApplicationName = "Nadeko Bot",
+                ApiKey = GoogleApiKey,
+            };
+
+            yt = new YouTubeService(bcs);
+            sh = new UrlshortenerService(bcs);
+            cs = new CustomsearchService(bcs);
+        }
+
         private static readonly Regex plRegex = new Regex("(?:youtu\\.be\\/|list=)(?<id>[\\da-zA-Z\\-_]*)", RegexOptions.Compiled);
         public async Task<IEnumerable<string>> GetPlaylistIdsByKeywordsAsync(string keywords, int count = 1)
         {

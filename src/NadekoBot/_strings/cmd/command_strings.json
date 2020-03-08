@@ -3445,5 +3445,12 @@
       "{0}updatescheck commit",
       "{0}updatescheck release"
     ]
+  },
+  "changegoogleapikey": {
+    "cmd": "changegoogleapikey cgak",
+    "desc": "Change the Google API key.",
+    "usage": [
+      "{0}changegoogleapikey apikey"
+    ]
   }
 }

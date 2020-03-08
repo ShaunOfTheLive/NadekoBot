@@ -9,6 +9,7 @@ namespace NadekoBot.Core.Services
     {
         IEnumerable<string> Languages { get; }
 
+        void ChangeGoogleApiKey(string GoogleApiKey);
         Task<IEnumerable<string>> GetVideoLinksByKeywordAsync(string keywords, int count = 1);
         Task<IEnumerable<(string Name, string Id, string Url)>> GetVideoInfosByKeywordAsync(string keywords, int count = 1);
         Task<IEnumerable<string>> GetPlaylistIdsByKeywordsAsync(string keywords, int count = 1);
