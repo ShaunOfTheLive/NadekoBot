@@ -27,6 +27,7 @@ using SixLabors.ImageSharp.PixelFormats;
 using SixLabors.ImageSharp;
 using SixLabors.ImageSharp.Processing;
 using SixLabors.ImageSharp.Processing.Drawing;
+using System.Text.RegularExpressions;
 
 namespace NadekoBot.Modules.Searches
 {
@@ -735,6 +736,7 @@ namespace NadekoBot.Modules.Searches
                         await Context.SendPaginatedConfirmAsync(0, (p) =>
                         {
                             var item = items[p];
+                            item.Definition = Regex.Replace(item.Definition, @"\[(.+?)\]", "$1");
                             return new EmbedBuilder().WithOkColor()
                                          .WithUrl(item.Permalink)
                                          .WithAuthor(eab => eab.WithIconUrl("http://i.imgur.com/nwERwQE.jpg").WithName(item.Word))
