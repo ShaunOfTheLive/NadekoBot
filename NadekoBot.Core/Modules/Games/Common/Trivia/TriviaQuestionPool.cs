@@ -18,7 +18,7 @@ namespace NadekoBot.Modules.Games.Common.Trivia
         public TriviaQuestionPool(IDataCache cache)
         {
             _cache = cache;
-            maxPokemonId = 721; //xd
+            maxPokemonId = 151; //xd
         }
 
         public TriviaQuestion GetRandomQuestion(HashSet<TriviaQuestion> exclude, bool isPokemon)
