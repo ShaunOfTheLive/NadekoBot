@@ -242,6 +242,7 @@ namespace NadekoBot.Core.Services.Impl
 
         public IEnumerable<string> Languages => _languageDictionary.Keys.OrderBy(x => x);
         private readonly Dictionary<string, string> _languageDictionary = new Dictionary<string, string>() {
+                    { "auto", "auto"},
                     { "afrikaans", "af"},
                     { "albanian", "sq"},
                     { "arabic", "ar"},

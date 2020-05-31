@@ -3,6 +3,7 @@ using Discord.Commands;
 using NadekoBot.Extensions;
 using System.Threading.Tasks;
 using System.Linq;
+using System.Text.RegularExpressions;
 using NadekoBot.Common.Attributes;
 using NadekoBot.Core.Services;
 using NadekoBot.Modules.Searches.Services;
@@ -29,6 +30,12 @@ namespace NadekoBot.Modules.Searches
                 try
                 {
                     await Context.Channel.TriggerTypingAsync().ConfigureAwait(false);
+                    Regex regex = new Regex(@".*>.*");
+                    Match match = regex.Match(langs);
+                    if (!match.Success) {
+                        text = langs + " " + text;
+                        langs = "auto>en";
+                    }
                     var translation = await _searches.Translate(langs, text).ConfigureAwait(false);
                     await Context.Channel.SendConfirmAsync(GetText("translation") + " " + langs, translation).ConfigureAwait(false);
                 }
