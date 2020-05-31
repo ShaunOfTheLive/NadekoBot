@@ -976,6 +976,7 @@ namespace NadekoBot.Modules.Searches
         }
 
         [NadekoCommand, Usage, Description, Aliases]
+        [OwnerOnly]
         public async Task ChangeGoogleApiKey(string GoogleApiKey)
         {
             _google.ChangeGoogleApiKey(GoogleApiKey);

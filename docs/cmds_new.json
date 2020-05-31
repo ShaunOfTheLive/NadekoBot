@@ -182,6 +182,21 @@
     },
     {
       "Aliases": [
+        ".cgak"
+      ],
+      "Description": "Changes the Google API key.",
+      "Usage": [
+        ".cgak"
+      ],
+      "Submodule": "DangerousCommands",
+      "Module": "Administration",
+      "Options": null,
+      "Requirements": [
+        "Bot Owner Only"
+      ]
+    },
+    {
+      "Aliases": [
         ".execsql"
       ],
       "Description": "Executes an sql command and returns the number of affected rows. Dangerous.",
